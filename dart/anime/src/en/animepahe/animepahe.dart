@@ -380,8 +380,8 @@ class AnimePahe extends MProvider {
         title: "Preferred domain",
         summary: "",
         valueIndex: 0,
-        entries: ["animepahe.com", "animepahe.si"],
-        entryValues: ["https://animepahe.com", "https://animepahe.si"],
+        entries: ["animepahe.com", "animepahe.pw"],
+        entryValues: ["https://animepahe.com", "https://animepahe.pw"],
       ),
       SwitchPreferenceCompat(
         key: "preffered_link_type",
