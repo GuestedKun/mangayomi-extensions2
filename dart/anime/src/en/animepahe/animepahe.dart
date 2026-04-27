@@ -10,7 +10,7 @@ class AnimePahe extends MProvider {
   final Client client = Client();
 
   @override
-  String get baseUrl => getPreferenceValue(source.id, "preferred_domain_new");
+  String get baseUrl => getPreferenceValue(source.id, "preferred_domain_new2");
 
   @override
   Map<String, String> get headers => {'cookie': '__ddg1_=;__ddg2_=;'};
@@ -284,7 +284,7 @@ class AnimePahe extends MProvider {
           ..url = videoUrl
           ..originalUrl = videoUrl
           ..quality = quality
-          ..headers = {"referer": "https://kwik.cx"};
+          ..headers = {"referer": "KwikLink"};
         videos.add(video);
       }
     }
@@ -361,12 +361,16 @@ class AnimePahe extends MProvider {
         return qualityMatchB - qualityMatchA;
       }
 
-      final regex = RegExp(r'(\d+)p');
-      final matchA = regex.firstMatch(a.quality);
-      final matchB = regex.firstMatch(b.quality);
-      final int qualityNumA = int.tryParse(matchA?.group(1) ?? '0') ?? 0;
-      final int qualityNumB = int.tryParse(matchB?.group(1) ?? '0') ?? 0;
-      return qualityNumB - qualityNumA;
+      try {
+        final regex = RegExp(r'(\d+)p');
+        final matchA = regex.firstMatch(a.quality);
+        final matchB = regex.firstMatch(b.quality);
+        final int qualityNumA = int.tryParse(matchA?.group(1) ?? '0') ?? 0;
+        final int qualityNumB = int.tryParse(matchB?.group(1) ?? '0') ?? 0;
+        return qualityNumB - qualityNumA;
+      } catch (_) {
+        return qualityMatchB - qualityMatchA;
+      }
     });
 
     return videos;
@@ -376,12 +380,12 @@ class AnimePahe extends MProvider {
   List<dynamic> getSourcePreferences() {
     return [
       ListPreference(
-        key: "preferred_domain_new",
+        key: "preferred_domain_new2",
         title: "Preferred domain",
         summary: "",
         valueIndex: 0,
-        entries: ["animepahe.com", "animepahe.pw"],
-        entryValues: ["https://animepahe.com", "https://animepahe.pw"],
+        entries: ["animepahe.pw", "animepahe.com"],
+        entryValues: ["https://animepahe.pw", "https://animepahe.com"],
       ),
       SwitchPreferenceCompat(
         key: "preffered_link_type",
